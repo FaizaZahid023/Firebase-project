@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,18 +12,19 @@
         <div class="card">
             <h1>Signup Form</h1>
             Email: <input type="email" name="email" id="email"><br>
-            password: <input type="password" name="password" id="password">
+            Password: <input type="password" name="password" id="password">
             <br>
-            Confrim password:<input type="password" placeholder="Confirm Password" class="confirm_pass" id="confirm_pass">
+            Confirm Password: <input type="password" placeholder="Confirm Password" class="confirm_pass" id="confirm_pass">
 
-            <button id="signupBtn">signup</button>
-            <button id="login">login</button>
+            <button id="signupBtn">Sign Up</button>
             
+            <p>Already have an account?</p>
+            <span><a href="login.html">Login</a></span> 
+            <button id="sign_out">Sign Out</button>
 
         </div>
     </div>
     
-     
     <script type="module" src="firebase.js"></script>
     <script type="module" src="app.js"></script>
 </body>

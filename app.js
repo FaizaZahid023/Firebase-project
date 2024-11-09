@@ -1,4 +1,4 @@
-import { auth, createUserWithEmailAndPassword } from "./firebase.js";
+import { auth, createUserWithEmailAndPassword ,signInWithEmailAndPassword} from "./firebase.js";
 
 let signup = () => {
     let email = document.getElementById("email");
@@ -65,7 +65,7 @@ let login = () => {
     }
 
     // Create new user
-    createUserWithEmailAndPassword(auth, email.value, password.value)
+    signInWithEmailAndPassword(auth, email.value, password.value)
         .then((userCredential) => {
             console.log("User signed up:", userCredential.user);
         })
@@ -74,13 +74,20 @@ let login = () => {
         });
 };
 
-// Add event listener for signup
-if (window.location.pathname == "/loginSignup/login.html") {
-    let logIn = document.getElementById("login_btn");
-    logIn.addEventListener("click", login);
+let signout = ()=>{
+    signOut(auth).then(() => {
+      console.log("Sign-out successful.");
+      
+    }).catch((error) => {
+      console.log(error)
+    });
   }
+
+
 let logIn = document.getElementById("login")
 logIn.addEventListener("click",login)
 
 let signupBtn = document.getElementById("signupBtn");
 signupBtn.addEventListener("click", signup);
+let sign_out = document.getElementById("sign_out")
+sign_out.addEventListener("click",signout)

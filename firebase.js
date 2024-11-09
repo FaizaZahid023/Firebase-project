@@ -3,7 +3,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import { 
   getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, 
-  onAuthStateChanged, sendEmailVerification, sendPasswordResetEmail, signOut 
 } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
 // Firebase configuration
@@ -21,5 +20,4 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-export { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, 
-  onAuthStateChanged, sendEmailVerification, sendPasswordResetEmail, signOut };
+export { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword };
