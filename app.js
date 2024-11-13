@@ -1,93 +1,77 @@
-import { auth, createUserWithEmailAndPassword ,signInWithEmailAndPassword} from "./firebase.js";
+import { auth, createUserWithEmailAndPassword ,signInWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signOut } from "./firebase.js"
 
-let signup = () => {
-    let email = document.getElementById("email");
-    let password = document.getElementById("password");
-    let cPassword = document.getElementById("confirm_pass").value;
-
+let signUp = () => {
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+    let cPassword = document.getElementById("cpassword").value;
+  
     // Regex for email and password validation
     let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     let passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
-
+  
     // Email validation check
-    if (!emailRegex.test(email.value)) {
-        alert("Please enter a valid email address.");
-        return;
+    if (!emailRegex.test(email)) {
+      alert("Please enter a valid email address.");
+      return;
     }
-
+  
     // Password validation check
-    if (!passwordRegex.test(password.value)) {
-        alert("Invalid password. It must contain at least one uppercase letter, one lowercase letter, and one number.");
-        return;
+    if (!passwordRegex.test(password)) {
+      alert("Invalid password. It must contain at least one uppercase letter, one lowercase letter, and one number.");
+      return;
     }
-
+  
     // Confirm password match check
-    if (password.value !== cPassword) {
-        alert("Passwords do not match.");
-        return;
+    if (password !== cPassword) {
+      alert("Passwords do not match.");
+      return;
     }
+  
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+  
+let sign_up = document.getElementById("sign_up")
+sign_up.addEventListener("click",signUp)
 
-    // Create new user
-    createUserWithEmailAndPassword(auth, email.value, password.value)
-        .then((userCredential) => {
-            console.log("User signed up:", userCredential.user);
-        })
-        .catch((error) => {
-            console.log("Error:", error);
-        });
-        
-};
-let login = () => {
-    let email = document.getElementById("email");
-    let password = document.getElementById("password");
-    let cPassword = document.getElementById("confirm_pass").value;
+let signIn=()=>{
+  let email = document.getElementById("email").value
+  let password = document.getElementById("password").value
 
-    // Regex for email and password validation
-    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    let passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+  signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    const user = userCredential.user;
+    console.log(user);
+  })
+  .catch((error) => {
+    console.log(error.code); 
+  });
+}
+let sign_in = document.getElementById("sign_in")
+sign_in.addEventListener("click",signIn)
 
-    // Email validation check
-    if (!emailRegex.test(email.value)) {
-        alert("Please enter a valid email address.");
-        return;
-    }
-
-    // Password validation check
-    if (!passwordRegex.test(password.value)) {
-        alert("Invalid password. It must contain at least one uppercase letter, one lowercase letter, and one number.");
-        return;
-    }
-
-    // Confirm password match check
-    if (password.value !== cPassword) {
-        alert("Passwords do not match.");
-        return;
-    }
-
-    // Create new user
-    signInWithEmailAndPassword(auth, email.value, password.value)
-        .then((userCredential) => {
-            console.log("User signed up:", userCredential.user);
-        })
-        .catch((error) => {
-            console.log("Error:", error);
-        });
-};
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    console.log(user);
+    // window.location.href = "./dashboard.html"
+  } else {
+  console.log("User not found")
+  }
+});
 
 let signout = ()=>{
-    signOut(auth).then(() => {
-      console.log("Sign-out successful.");
-      
-    }).catch((error) => {
-      console.log(error)
-    });
-  }
-
-
-let logIn = document.getElementById("login")
-logIn.addEventListener("click",login)
-
-let signupBtn = document.getElementById("signupBtn");
-signupBtn.addEventListener("click", signup);
+  signOut(auth).then(() => {
+    console.log("Sign-out successful.");
+    
+  }).catch((error) => {
+    console.log(error)
+  });
+}
 let sign_out = document.getElementById("sign_out")
 sign_out.addEventListener("click",signout)

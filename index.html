@@ -3,29 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup Form</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        
-        <div class="card">
-            <h1>Signup Form</h1>
-            Email: <input type="email" name="email" id="email"><br>
-            Password: <input type="password" name="password" id="password">
-            <br>
-            Confirm Password: <input type="password" placeholder="Confirm Password" class="confirm_pass" id="confirm_pass">
 
-            <button id="signupBtn">Sign Up</button>
-            
-            <p>Already have an account?</p>
-            <span><a href="login.html">Login</a></span> 
-            <button id="sign_out">Sign Out</button>
-
-        </div>
-    </div>
+    <div class="card">
+        <label for="email">Email
+            <br><input id="email" type="email">
+        </label><br>
+        <label for="password">Password
+            <br><input id="password" type="password">
+        </label><br>
+        <label for="password">confirm Password
+            <br><input id="cpassword" type="password">
+        </label><br>
+        <button id="sign_up">Sign up</button>
+        <button id="sign_in">Sign in</button>
+        <button id="sign_out" class="btn">Sign Out</button>
+        <br>
+        <button type="button" id="google" class="btn" >
+            Sign in with Google
+          </button>
     
+    </div>
+
+
+  
     <script type="module" src="firebase.js"></script>
     <script type="module" src="app.js"></script>
+    
+
 </body>
 </html>
